@@ -1,0 +1,118 @@
+###
+# Settings for various secret keys
+###
+# Django Master
+## 5 or more characters and more than 50 characters
+## Generation code
+## import django
+## django.core.management.utils.get_random_secret_key()
+DJANGO_SECRET_KEY='l7u%(g%nm8%s-#@5g_^2dy+ezl85k@#g*0=$zrk8)rh#)5wftq'
+
+
+
+# security.Encryption
+## FIELD_ENCRYPTION_KEYS, ENCRYPTION_HASH_KEY: Hexadecimal (0-9a-f) 32 bytes (64 characters)
+## Generation code
+## import secrets
+## hex_string = secrets.token_bytes(32).hex()
+FIELD_ENCRYPTION_KEYS_01='e695f9355cde1d36009e966cb3d218371bef512af2ec695ba8aff978021b1c51'
+FIELD_ENCRYPTION_KEYS_02='19a5c2da1260688ba5a22c6e7111b47022df34eab26957c442aab438560944d7'
+ENCRYPTION_HASH_KEY='84ef13ba3a0f34e08fdb782f08da11680395c0c3dcc52a558e723629d32fcc27'
+
+
+
+###
+# Site information
+###
+# FrontendURL Do not put / at the end
+
+FRONTEND_URL='*** YOUR DEPLOY FRONT END URL ***'
+
+###
+# Other security measures
+###
+# ALLOWED_HOSTS
+# https://qiita.com/hobbypro/items/dac26ce063a938d32b36
+
+ALLOWED_HOSTS_DEBUG='*'
+ALLOWED_HOSTS_01='*'
+
+# admin_protect.AdminProtectSetting
+# ALLOWED_IP_ADMIN: Multiple can be specified with a comma. Do not leave a space)
+ADMIN_PATH='admin'
+ALLOWED_IP_ADMIN='127.0.0.1:8000'
+
+# security.DjangoAxes
+AXES_FAILURE_LIMIT=5
+AXES_COOLOFF_TIME=24
+AXES_ONLY_USER_FAILURES=False
+AXES_RESET_ON_SUCCESS=True
+
+# security.AccessSecurityMiddleware
+ACCESS_COUNT_SECONDS_TIME=30
+N_TIMES_TO_BLOCK_ACCESS=30
+N_TIMES_TO_ADD_BLOCKLIST=60
+BLOCKLIST_EFFECTIVE_DAYS=30
+REGISTERED_BLOCK_IP_LIST_READ_FREC=60
+
+# extra_settings.Session
+SESSION_EXPIRE_AT_BROWSER_CLOSE=False
+SESSION_COOKIE_AGE=86400 
+
+# extra_settings.EmailBackend
+# Since blacklist etc. are not supported, consider SendGrid etc. for production
+ADMIN_NOTICE_EMAIL='ADMIN_NOTICE_EMAIL'
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+DEFAULT_FROM_EMAIL='DEFAULT_FROM_EMAIL'
+DEFAULT_REPLY_EMAIL='DEFAULT_REPLY_EMAIL'
+EMAIL_HOST_USER='EMAIL_HOST_USER'
+EMAIL_HOST_PASSWORD='EMAIL_HOST_PASSWORD'
+
+# Email Certification
+EMAIL_CERTIFICATION_TOKEN_AGE=3600
+PASSWORD_RESET_TOKEN_AGE=600
+
+# extra_settings.SocialLogin
+IS_USE_SOCIAL_LOGIN=True
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY='SOCIAL_AUTH_GOOGLE_OAUTH2_KEY'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET='SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET'
+
+# security.rePATCHA
+# https://www.google.com/recaptcha/admin
+RECAPTCHA_PUBLIC_KEY='*** YOUR RECAPTCHA_PUBLIC_KEY ***'
+RECAPTCHA_PRIVATE_KEY='*** YOUR RECAPTCHA_PRIVATE_KEY ***'
+###
+# For GCP
+###
+# add_settings.Database add_settings.StaticMediaFiles
+# DB_SQL_NAME: Use only lowercase alphanumeric characters and underscores. Avoid uppercase.
+GCP_PROJECT_ID='*** YOUR DB_SQL_LOCALGS_PROJECT_ID_PORT ***'
+
+# Cloud SQL
+DB_SQL_DB_NAME='*** YOUR DB_SQL_DB_NAME ***'
+DB_SQL_USER_NAME='*** YOUR DB_SQL_USER_NAME ***'
+DB_SQL_USER_PASSWORD_GCP='*** YOUR DB_SQL_USER_PASSWORD_GCP ***'
+DB_SQL_CONNECTION_NAME='*** YOUR DB_SQL_CONNECTION_NAME ***'
+DB_SQL_LOCAL_PORT='*** YOUR DB_SQL_LOCAL_PORT ***'
+
+# Storage
+GS_CREDENTIALS_JSON='*** YOUR GS_CREDENTIALS_JSON .json ***'
+GS_BUCKET_NAME='*** YOUR GS_BUCKET_NAME ***'
+
+# RADIS
+IS_USE_RADIS=True
+RADIS_HOST='localhost'
+RADIS_PORT='6379'
+
+###
+# For ChatGPT
+###
+OPENAI_API='Open_AI API KEY'
+
+# For Stripe
+STRIPE_PUBLISHABLE_KEY="YOUR STRIPE PUBLISHABLE KEY"
+STRIPE_SECRET_KEY="YOUR STRIPE SECRET KEY"
+STRIPE_PRODUCT_ID="YOUR STRIPE PRODUCT ID"
+STRIPE_SUBSCRIPTION_PRICE_ID="YOUR STRIPE SUBSCRIPTION PRICE ID"
+STRIPE_WEBHOOK_SECRET=""

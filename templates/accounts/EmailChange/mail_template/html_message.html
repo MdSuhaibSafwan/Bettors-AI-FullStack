@@ -1,0 +1,9 @@
+{% autoescape off %}
+
+<h1>Email Address Change Accepted</h1>
+Please access the following URL to complete the authentication for your new email address:<br />
+
+{{ ACTIVATE_URL }}<br />
+※ The authentication URL is valid for {{ TOKEN_EXPIRED }} hours. After the expiration, it will become invalid.
+
+{% endautoescape %}

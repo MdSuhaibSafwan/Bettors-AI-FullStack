@@ -1,0 +1,27 @@
+# Ignore cache files
+**/__pycache__/
+
+# Ignore environment files
+.env
+
+# Ignore VS Code configuration files
+.vscode/
+
+# Ignore other Django related files
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.sql
+*.pot
+*.log
+*.egg-info/
+dist/
+build/
+assets/
+media/
+static/
+local_settings.py
+db.sqlite3
+celerybeat-schedule
+celerybeat.pid

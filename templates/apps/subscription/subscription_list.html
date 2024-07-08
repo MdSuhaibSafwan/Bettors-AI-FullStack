@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load account_extras %}
+
+{% block content %}
+
+{% is_user_applicable_for_subscription request.user as is_eligible %}
+
+<div class="row justify-content-center my-5">
+	{% for subscription in subscriptions %}
+	    <div class="col-md-6 col-lg-4 mb-4">
+	        <div class="card">
+	            <div class="card-header">
+	                <h4 class="text-center">{{ subscription.name }}</h4>
+	            </div>
+	            <div class="card-body">
+	                <h5 class="card-title text-center">{%if subscription.is_free%}FREE{%else%}{%if subscription.is_monthly%}Monthly {%elif subscription.is_weekly%}Weekly {%elif subscription.is_yearly%}Yearly {%endif%}${{subscription.price}}{%endif%}</h5>
+	                <p class="card-text">{{subscription.description}}</p>
+					<br>
+	                <!-- Change button text to "CURRENT" and make it inactive -->
+	                {% if request.user in subscription.user.all %}
+		                <button class="btn btn-primary btn-block" disabled>CURRENT</button>
+	                {% else %}
+	                	{% if is_eligible %}
+			                <button data-id="{{subscription.id}}" class="subscribe-btn btn btn-primary btn-block">Subscribe Now</button>
+			            {% else %}
+		                	<button class="btn btn-primary btn-block" disabled>Subscrbe</button>
+		                {% endif %}
+	                {% endif %}
+	            </div>
+	        </div>
+	    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock content %}
+
+{% block js_rear %}
+	<script type="text/javascript">
+
+		function getCookie(name) {
+		    let cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        const cookies = document.cookie.split(';');
+		        for (let i = 0; i < cookies.length; i++) {
+		            const cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		};
+
+
+		const csrftoken = getCookie('csrftoken');
+
+
+		var buttons = document.getElementsByClassName("subscribe-btn");
+		for (button of buttons){
+			button.addEventListener('click', (e) => {
+				e.preventDefault();
+				var dataId = e.target.getAttribute("data-id");
+				console.log(dataId);
+				var url = `{% url 'create-payment-link' %}`
+				console.log(url);
+
+			    let formData = new FormData();
+			    formData.append("subscription-id", dataId);
+
+			    fetch(url, {
+			        "method": "POST",
+			        "headers": {
+			            'X-Requested-With': 'XMLHttpRequest', 
+			            'Accept': 'application/json',
+			            'X-CSRFToken': csrftoken,
+			        },
+			        'body': formData
+			    })
+			    .then((resp) => {
+			        return resp.json();
+			    })
+			    .then((data) => {
+			    	if (data.status_code == 200){
+			    		var paymentLinkUrl = data.payment_link_url;
+			    		return window.open(paymentLinkUrl, '_blank');
+			    	}
+			    	console.log(data);
+			    })
+			});
+		};
+	</script>
+
+{% endblock js_rear %}

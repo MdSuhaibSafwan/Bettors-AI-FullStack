@@ -1,0 +1,16 @@
+{% extends 'apps/user_properties/user_properties_base.html' %}
+
+{# --- TITLE --- #}
+{% block user_properties_title %} - Confirmation Email Sent{% endblock %}
+
+{# --- SIDENAV --- #}
+{% block user_properties_sidenav %}
+{% include 'apps/user_properties/asset/sidenav/sidenav.html' with email_change_active='active' %}
+{% endblock %}
+
+{# --- CONTENT --- #}
+{% block user_properties_content %}
+<h1 class="f-content-title">Confirmation Email Sent</h1>
+<p>Your email address change is not yet complete.</p>
+<p>Please complete the authentication by following the instructions sent to your new email address.</p>
+{% endblock %}
